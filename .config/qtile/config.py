@@ -55,6 +55,9 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Fullscreen
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
     
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -62,39 +65,19 @@ keys = [
     # multiple stack panes
     Key(
         [mod, "shift"],
-        "Return",
+        "space",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
-
-
+### GROUPS
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
@@ -121,17 +104,23 @@ for i in groups:
         ]
     )
 
+layout_theme = {
+    "border_width": 4,
+    # Borderless single window
+    "single_border_width": 0,
+    "border_on_single": False,
+}
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Tile(**layout_theme),
+    layout.MonadTall(**layout_theme),
     layout.Max(),
-    # Try more layouts by unleashing below layouts.
+    # layout.Columns(**layout_theme, border_focus_stack=["#d75f5f", "#8f3d3d"]),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
@@ -144,6 +133,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+# TODO: Configure widges and top bar
 screens = [
     Screen(
         top=bar.Bar(
