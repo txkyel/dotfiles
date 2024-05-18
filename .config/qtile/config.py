@@ -105,10 +105,8 @@ for i in groups:
     )
 
 layout_theme = {
-    "border_width": 4,
-    # Borderless single window
-    "single_border_width": 0,
-    "border_on_single": False,
+    "border_width": 2,
+    "margin": 10,
 }
 
 layouts = [
@@ -128,33 +126,48 @@ layouts = [
 
 widget_defaults = dict(
     font="sans",
-    fontsize=12,
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
+widgets = [
+    widget.Spacer(length=10),
+    widget.CurrentLayoutIcon(
+        scale=0.45,
+    ),
+    widget.Spacer(length=4),
+    widget.GroupBox(
+        highlight_method="line",
+        visible_groups=["1", "2", "3", "4", "5"],
+    ),
+    widget.Spacer(length=4),
+    widget.Prompt(),
+    widget.Spacer(),
+    widget.WindowName(),
+    widget.Spacer(),
+    # Excluded if using wired connection
+    widget.Wlan(),
+    widget.Bluetooth(),
+    widget.Volume(emoji=True),
+    widget.Volume(),
+    widget.Spacer(length=4),
+    # Exclude battery if used on a desktop
+    # widget.BatteryIcon(),
+    # widget.Battery(),
+    # widget.Spacer(length=4),
+    widget.Clock(format="%a, %b %d %H:%M"),
+    widget.Systray(),
+    widget.Spacer(length=10),
+]
+
 screens = [
     Screen(
         top=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Volume(fmt="Vol: {}"),
-                widget.Spacer(length=8),
-                widget.Clock(format="%a, %b %d - %H:%M"),
-                widget.Spacer(length=8),
-                widget.Systray(),
-                widget.Spacer(length=8),
-            ],
-            24,
-        ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-    ),
+            widgets=widgets,
+            size=36,
+        )
+    )
 ]
 
 # Drag floating layouts.
