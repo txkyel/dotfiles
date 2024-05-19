@@ -2,6 +2,9 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"	# Load aliases
 source "$ZDOTDIR/optionrc"					# Load options
 source "$ZDOTDIR/pluginrc"					# Load plugins
 
+# Prompt
+PS1="%F{cyan}%~ $%(?.%F{green}.%F{red})%#%f "
+
 # History
 HISTSIZE=100000
 SAVEHIST=100000
