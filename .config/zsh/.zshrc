@@ -26,7 +26,7 @@ bindkey -M menuselect "k" vi-up-line-or-history
 bindkey -M menuselect "l" vi-forward-char
 
 ### PLUGINS
+[ -f "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] \
+	&& source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -f "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ] \
 	&& source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-[ -f "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ] \
-	&& source "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
