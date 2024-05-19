@@ -2,9 +2,9 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"	# Load aliases
 source "$ZDOTDIR/optionrc"					# Load options
 source "$ZDOTDIR/pluginrc"					# Load plugins
 
-### HISTORY
-HISTSIZE=10000
-SAVEHIST=10000
+# History
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 # zsh-history-substring-search keybindings
