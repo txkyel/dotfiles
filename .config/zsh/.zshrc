@@ -14,9 +14,19 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 
 ### AUTOCOMPLETE
 autoload -Uz compinit
-zstyle ':completion:*' menu select
+zstyle ":completion:*" menu select
+zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files
 
 ### KEYBINDS
-bindkey -v
+bindkey -M menuselect "h" vi-backward-char
+bindkey -M menuselect "j" vi-down-line-or-history
+bindkey -M menuselect "k" vi-up-line-or-history
+bindkey -M menuselect "l" vi-forward-char
+
+### PLUGINS
+[ -f "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ] \
+	&& source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+[ -f "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ] \
+	&& source "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
