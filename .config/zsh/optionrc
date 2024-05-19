@@ -1,0 +1,11 @@
+#!/bin/sh
+
+setopt correct			# Auto correct
+setopt extendedglob		# Extended globbing. Allows using regular expresions with *
+setopt nocaseglob		# Case insensitive globbing
+setopt nobeep			# No beep
+setopt appendhistory		# Append history instead of overwriting
+setopt histignorealldups	# Remove old duplicates of a command
+setopt histignorespace		# Don't save commands starting with space
+setopt autocd 			# If only a directory path is entered, cd to directory
+
