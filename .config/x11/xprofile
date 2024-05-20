@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# LightDM cringe
+source ~/.zshenv
+
