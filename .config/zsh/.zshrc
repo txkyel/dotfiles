@@ -8,6 +8,7 @@ PS1="%F{cyan}%~ $%(?.%F{green}.%F{red})%#%f "
 # History
 HISTSIZE=100000
 SAVEHIST=100000
+[ -d "$XDG_STATE_HOME/zsh" ] || mkdir -p "$XDG_STATE_HOME/zsh"
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 # zsh-history-substring-search keybindings
