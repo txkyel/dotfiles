@@ -19,6 +19,7 @@ local opts = {
         lazy = true,
     },
     install = {
+        colorscheme = { "gruvbox" }
     },
     rtp = {
         disabled_plugins = {
@@ -37,6 +38,5 @@ local opts = {
         notify = "true",
     },
 }
-
 
 require("lazy").setup("plugins", opts)

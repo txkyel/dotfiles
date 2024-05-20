@@ -1,7 +1,9 @@
 {
+  "gruvbox.nvim": { "branch": "main", "commit": "96a8ec336fb48a11cefbd57508888361431aac26" },
   "lazy.nvim": { "branch": "main", "commit": "0de782a6b0ffba599dbd332a4019d852564bf28c" },
-  "neoconf.nvim": { "branch": "main", "commit": "0065de89c834e1090a847a9aa126af5dce1db4dc" },
+  "neoconf.nvim": { "branch": "main", "commit": "d321ba056f06e079da99924b948a45dfbacdfba9" },
   "neodev.nvim": { "branch": "main", "commit": "ce9a2e8eaba5649b553529c5498acb43a6c317cd" },
   "nvim-tree.lua": { "branch": "master", "commit": "2bc725a3ebc23f0172fb0ab4d1134b81bcc13812" },
+  "vim-be-good": { "branch": "master", "commit": "4fa57b7957715c91326fcead58c1fa898b9b3625" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

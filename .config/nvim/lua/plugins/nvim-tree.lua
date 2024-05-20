@@ -3,8 +3,8 @@ return {
     lazy = false,
     opts = {
         filters = {
-            dotfiles = true,
-        },
-    },
+            dotfiles = true
+        }
+    }
 }
 
