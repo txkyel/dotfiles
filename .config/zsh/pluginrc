@@ -27,6 +27,6 @@
   apply zsh-users zsh-syntax-highlighting
   apply zsh-users zsh-history-substring-search
   apply zsh-users zsh-autosuggestions
-  apply jeffreytse zsh-vi-mode
+  apply romkatv powerlevel10k
 }
 
