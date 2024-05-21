@@ -47,6 +47,7 @@ bindkey -M menuselect 'l' vi-forward-char
 
 # vi mode
 bindkey -v
+export KEYTIMEOUT=1
 
 # Fix backspace after returning to insert mode
 bindkey -v '^?' backward-delete-char

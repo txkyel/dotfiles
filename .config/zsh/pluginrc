@@ -23,7 +23,7 @@
   }
 
   # TODO: See if highlighting has noticiable difference running on physical hardware
-#  apply zdharma-continuum fast-syntax-highlighting
+  # apply zdharma-continuum fast-syntax-highlighting
   apply zsh-users zsh-syntax-highlighting
   apply zsh-users zsh-history-substring-search
   apply zsh-users zsh-autosuggestions
