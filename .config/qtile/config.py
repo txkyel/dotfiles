@@ -125,7 +125,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
+    font="JetBrainsMono Nerd Font Bold",
     fontsize=14,
     padding=3,
 )
@@ -143,9 +143,8 @@ widgets = [
     ),
     widget.Spacer(length=4),
     widget.Prompt(),
-    widget.Spacer(),
+    widget.Spacer(length=4),
     widget.WindowName(),
-    widget.Spacer(),
     # Excluded if using wired connection
     widget.Wlan(),
     widget.Bluetooth(),
