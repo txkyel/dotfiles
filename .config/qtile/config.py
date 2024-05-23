@@ -146,17 +146,18 @@ widgets = [
     widget.Spacer(length=4),
     widget.WindowName(),
     # Excluded if using wired connection
-    widget.Wlan(),
+    widget.Systray(padding=10),
     widget.Bluetooth(),
+    widget.Spacer(length=10),
+    widget.Wlan(),
     widget.Volume(padding=10, emoji=True, emoji_list=["\ueee8", "\uf026", "\uf027", "\uf028"]),
     widget.Volume(),
-    widget.Spacer(length=4),
     # Exclude battery if used on a desktop
+    # widget.Spacer(length=10),
     # widget.BatteryIcon(),
     # widget.Battery(),
-    # widget.Spacer(length=4),
+    widget.Spacer(length=10),
     widget.Clock(format="%a, %b %d %H:%M"),
-    widget.Systray(),
     widget.Spacer(length=10),
 ]
 
