@@ -148,7 +148,7 @@ widgets = [
     # Excluded if using wired connection
     widget.Wlan(),
     widget.Bluetooth(),
-    widget.Volume(emoji=True),
+    widget.Volume(padding=10, emoji=True, emoji_list=["\ueee8", "\uf026", "\uf027", "\uf028"]),
     widget.Volume(),
     widget.Spacer(length=4),
     # Exclude battery if used on a desktop
