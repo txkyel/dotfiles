@@ -23,10 +23,8 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[OA' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[OB' history-substring-search-down
-bindkey -M vicmd '^[[A' history-substring-search-up
-bindkey -M vicmd '^[OA' history-substring-search-up
-bindkey -M vicmd '^[[B' history-substring-search-down
-bindkey -M vicmd '^[OB' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 bindkey -M viins '^[[A' history-substring-search-up
 bindkey -M viins '^[OA' history-substring-search-up
 bindkey -M viins '^[[B' history-substring-search-down
@@ -48,6 +46,11 @@ bindkey -M menuselect 'l' vi-forward-char
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+
+# Edit line in vim
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'vv' edit-command-line
 
 # Fix backspace after returning to insert mode
 bindkey -v '^?' backward-delete-char
