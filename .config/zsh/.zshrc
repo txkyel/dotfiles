@@ -48,9 +48,9 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Edit line in vim
-autoload -U edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd 'vv' edit-command-line
+bindkey -M vicmd '^e' edit-command-line
 
 # Fix backspace after returning to insert mode
 bindkey -v '^?' backward-delete-char
