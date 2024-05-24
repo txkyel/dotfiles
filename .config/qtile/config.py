@@ -78,7 +78,26 @@ keys = [
     # rofi
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using rofi"),
     Key([mod], "p", lazy.spawn("rofipower"), desc="Shutdown menu"),
+
+    # Keybindings
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 15%-"), desc="Lower Brightness"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 15%+"), desc="Increase Brightness"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-"), desc="Lower Volume"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+"), desc="Increase Volume"),
+    Key(
+        [],
+        "XF86AudioMute",
+        lazy.spawn("amixer sset Master 1+ toggle"),
+        desc="Mute/Unmute Volume"
+    ),
+    Key(
+        [],
+        "XF86AudioMicMute",
+        lazy.spawn("amixer sset Capture 1+ toggle"),
+        desc="Mute/Unmute Mic"
+    ),
 ]
+
 
 ### GROUPS
 groups = [Group(i) for i in "123456789"]
@@ -152,13 +171,11 @@ widgets = [
     widget.Systray(padding=10),
     widget.Bluetooth(),
     widget.Spacer(length=10),
-    widget.Wlan(),
+    widget.Wlan(interface="wlp3s0"),
     widget.Volume(padding=10, emoji=True, emoji_list=["\ueee8", "\uf026", "\uf027", "\uf028"]),
     widget.Volume(),
-    # Exclude battery if used on a desktop
-    # widget.Spacer(length=10),
-    # widget.BatteryIcon(),
-    # widget.Battery(),
+    widget.Spacer(length=10),
+    widget.Battery(),
     widget.Spacer(length=10),
     widget.Clock(format="%a, %b %d %H:%M"),
     widget.Spacer(length=10),
