@@ -96,6 +96,10 @@ keys = [
         lazy.spawn("amixer sset Capture 1+ toggle"),
         desc="Mute/Unmute Mic"
     ),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause player"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Skip to next"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Skip to previous"),
+    Key([], "XF86AudioStop", lazy.spawn("playerctl stop"), desc="Stop player"),
 ]
 
 
