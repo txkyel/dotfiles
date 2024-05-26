@@ -176,12 +176,24 @@ widgets = [
     widget.Bluetooth(),
     widget.Spacer(length=10),
     widget.Wlan(interface="wlp3s0"),
-    widget.Volume(padding=10, emoji=True, emoji_list=["\ueee8", "\uf026", "\uf027", "\uf028"]),
+    widget.Spacer(length=10),
+    widget.Battery(
+        charge_char="󰂄",
+        discharge_char="󰁾",
+        empty_char="󰂎",
+        full_char="󰁹",
+        not_charging_char="󱉝",
+        unknown_char="󰂃",
+        format="{char} {percent:2.0%}",
+    ),
+    widget.Spacer(length=10),
+    # Space added to allow space for non monospace emojis
+    widget.Volume(emoji=True, emoji_list=[" ", " ", " ", " "]),
     widget.Volume(),
     widget.Spacer(length=10),
-    widget.Battery(),
+    widget.Clock(format="󰃭 %a, %b %d"),
     widget.Spacer(length=10),
-    widget.Clock(format="%a, %b %d %H:%M"),
+    widget.Clock(format="󰥔 %H:%M"),
     widget.Spacer(length=10),
 ]
 
