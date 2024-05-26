@@ -100,6 +100,13 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Skip to next"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Skip to previous"),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop"), desc="Stop player"),
+    # Screenshot entire desktop to clipboard
+    Key(
+        [],
+        "Print",
+        lazy.spawn("maim | xclip -selection clipboard -t image/png", shell=True),
+        desc="Screenshot to clipboard"
+    ),
 ]
 
 
