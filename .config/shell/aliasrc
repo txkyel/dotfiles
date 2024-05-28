@@ -16,5 +16,4 @@ alias ip="ip -color=auto"
 
 # Dotfiles repo alias
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias configclean=\
-	"/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME update-index --assume-unchanged README.md && rm README.md"
+alias configclean="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME update-index --assume-unchanged README.md && rm README.md"
