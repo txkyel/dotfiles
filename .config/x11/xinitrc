@@ -1,6 +1,6 @@
 #!/bin/sh
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ] \
-    && source "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" || source "$HOME/.xprofile"
+    && . "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" || . "$HOME/.xprofile"
 
 exec qtile start

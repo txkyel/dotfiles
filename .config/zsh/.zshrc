@@ -5,9 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"	# Load aliases
-source "$ZDOTDIR/optionrc"					# Load options
-source "$ZDOTDIR/pluginrc"					# Load plugins
+. "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"	# Load aliases
+. "$ZDOTDIR/optionrc"					# Load options
+. "$ZDOTDIR/pluginrc"					# Load plugins
 
 # History
 HISTSIZE=100000

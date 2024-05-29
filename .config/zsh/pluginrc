@@ -16,9 +16,9 @@
     fi
     
     if [ "${plugin}" = "powerlevel10k" ]; then
-      source "${ZPLUGINDIR}/${plugin}/${plugin}.zsh-theme"
+      . "${ZPLUGINDIR}/${plugin}/${plugin}.zsh-theme"
     else
-      source "${ZPLUGINDIR}/${plugin}/${plugin}.plugin.zsh"
+      . "${ZPLUGINDIR}/${plugin}/${plugin}.plugin.zsh"
     fi
   }
 
