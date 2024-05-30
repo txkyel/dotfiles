@@ -25,10 +25,10 @@
 # SOFTWARE.
 
 from libqtile import bar, layout, qtile, widget
+from libqtile.widget.battery import Battery, BatteryState, BatteryStatus
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-
 
 mod = "mod4"
 terminal = "alacritty"
@@ -144,8 +144,8 @@ layout_theme = {
 
 layouts = [
     layout.Tile(**layout_theme),
-    layout.MonadTall(**layout_theme),
     layout.Max(),
+    # layout.MonadTall(**layout_theme),
     # layout.Columns(**layout_theme, border_focus_stack=["#d75f5f", "#8f3d3d"]),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -157,12 +157,58 @@ layouts = [
     # layout.Zoomy(),
 ]
 
+
+### WIDGETS
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font Bold",
     fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+
+class MyBattery(Battery):
+    """Overrides the build_string method for better use of Nerd Font battery icons"""
+    def build_string(self, status: BatteryStatus) -> str:
+        if self.layout is not None:
+            if self.state == BatteryState.DISCHARGING and status.percent < self.low_percentage:
+                self.layout.color = self.low_foreground
+                self.background = self.low_background
+            else:
+                self.layout.color = self.normal_foreground
+                self.background = self.normal_background
+
+        if status.state == BatteryState.DISCHARGING:
+            # Main override branch
+            if status.percent >= 0.90:
+                char = "󰂂"
+            elif status.percent >= 0.80:
+                char = "󰂁"
+            elif status.percent >= 0.70:
+                char = "󰂀"
+            elif status.percent >= 0.60:
+                char = "󰁿"
+            elif status.percent >= 0.50:
+                char = "󰁾"
+            elif status.percent >= 0.40:
+                char = "󰁽"
+            elif status.percent >= 0.30:
+                char = "󰁼"
+            elif status.percent >= 0.20:
+                char = "󰁻"
+            elif status.percent >= 0.10:
+                char = "󰁺"
+            else:
+                char = "󰂃"
+        elif status.state == BatteryState.CHARGING:
+            char = "󰂄"
+        elif status.state == BatteryState.FULL or status.percent >= 1:
+            char = "󰁹"
+        elif status.state == BatteryState.EMPTY or \
+                (status.state == BatteryState.UNKNOWN and status.percent == 0):
+            char = "󰂎"
+        else:
+            char = "󰂑"
+        return self.format.format(char=char, percent=status.percent)
 
 widgets = [
     widget.Spacer(length=10),
@@ -178,20 +224,18 @@ widgets = [
     widget.Prompt(),
     widget.Spacer(length=4),
     widget.WindowName(),
-    # Excluded if using wired connection
-    widget.Systray(padding=10),
-    widget.Bluetooth(),
     widget.Spacer(length=10),
-    widget.Wlan(interface="wlp3s0"),
+    widget.Systray(padding=10),
+    # widget.Spacer(length=10),
+    # widget.Bluetooth(),
+    # Excluded if using wired connection
+    # widget.Spacer(length=10),
+    # widget.Wlan(interface="wlp3s0"),
     widget.Spacer(length=10),
     widget.Battery(
-        charge_char="󰂄",
-        discharge_char="󰁾",
-        empty_char="󰂎",
-        full_char="󰁹",
-        not_charging_char="󱉝",
-        unknown_char="󰂃",
         format="{char} {percent:2.0%}",
+        low_percentage=0.1,
+        notify_below=0.1,
     ),
     widget.Spacer(length=10),
     # Space added to allow space for non monospace emojis
