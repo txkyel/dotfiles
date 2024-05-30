@@ -170,11 +170,11 @@ class MyBattery(Battery):
     """Overrides the build_string method for better use of Nerd Font battery icons"""
     def build_string(self, status: BatteryStatus) -> str:
         if self.layout is not None:
-            if self.state == BatteryState.DISCHARGING and status.percent < self.low_percentage:
+            if status.state == BatteryState.DISCHARGING and status.percent < self.low_percentage:
                 self.layout.color = self.low_foreground
                 self.background = self.low_background
             else:
-                self.layout.color = self.normal_foreground
+                self.layout.color = self.foreground
                 self.background = self.normal_background
 
         if status.state == BatteryState.DISCHARGING:
@@ -208,7 +208,9 @@ class MyBattery(Battery):
             char = "󰂎"
         else:
             char = "󰂑"
-        return self.format.format(char=char, percent=status.percent)
+
+        # Hardcoded format with battery character and battery percentage
+        return "{char} {percent:2.0%}".format(char=char, percent=status.percent)
 
 widgets = [
     widget.Spacer(length=10),
@@ -232,8 +234,7 @@ widgets = [
     # widget.Spacer(length=10),
     # widget.Wlan(interface="wlp3s0"),
     widget.Spacer(length=10),
-    widget.Battery(
-        format="{char} {percent:2.0%}",
+    MyBattery(
         low_percentage=0.1,
         notify_below=0.1,
     ),
