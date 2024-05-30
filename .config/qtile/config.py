@@ -159,13 +159,6 @@ layouts = [
 
 
 ### WIDGETS
-widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Bold",
-    fontsize=14,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
 class MyBattery(Battery):
     """Overrides the build_string method for better use of Nerd Font battery icons"""
     def build_string(self, status: BatteryStatus) -> str:
@@ -212,6 +205,27 @@ class MyBattery(Battery):
         # Hardcoded format with battery character and battery percentage
         return "{char} {percent:2.0%}".format(char=char, percent=status.percent)
 
+class VolumeIcon(widget.Volume):
+    """Overrides the _update_drawer method for better use of Nerd Font battery icons"""
+    def _update_drawer(self):
+        emoji_list=[" ", " ", " ", " "]
+        if self.volume <= 0:
+            self.text = emoji_list[0]
+        elif self.volume <= 33:
+            self.text = emoji_list[1]
+        elif self.volume <= 66:
+            self.text = emoji_list[2]
+        else:
+            self.text = emoji_list[3]
+
+widget_defaults = dict(
+    font="JetBrainsMono Nerd Font Bold",
+    fontsize=14,
+    padding=3,
+)
+extension_defaults = widget_defaults.copy()
+
+
 widgets = [
     widget.Spacer(length=10),
     widget.CurrentLayoutIcon(
@@ -240,7 +254,7 @@ widgets = [
     ),
     widget.Spacer(length=10),
     # Space added to allow space for non monospace emojis
-    widget.Volume(emoji=True, emoji_list=[" ", " ", " ", " "]),
+    VolumeIcon(),
     widget.Volume(),
     widget.Spacer(length=10),
     widget.Clock(format="󰃭 %a, %b %d"),
