@@ -137,9 +137,33 @@ for i in groups:
         ]
     )
 
+# Dracula colour scheme
+colors = {
+    "fg": "#F8F8F2",
+    "bg": "#282A36",
+    "0":     "#000000", # Black
+    "8":     "#4D4D4D",
+    "1":     "#FF5555", # Red
+    "9":     "#FF6E67",
+    "2":     "#50FA7B", # Green
+    "10":    "#5AF78E",
+    "3":     "#F1FA8C", # Yellow
+    "11":    "#F4F99D",
+    "4":     "#BD93F9", # Blue
+    "12":    "#CAA9FA",
+    "5":     "#FF79C6", # Purple
+    "13":    "#FF92D0",
+    "6":     "#8BE9FD", # Cyan
+    "14":    "#9AEDFE",
+    "7":     "#BFBFBF", # White
+    "15":    "#E6E6E6",
+}
+
 layout_theme = {
     "border_width": 2,
-    "margin": 10,
+    "margin": 8,
+    "border_focus": colors["4"],
+    "border_normal": colors["8"],
 }
 
 layouts = [
@@ -222,6 +246,7 @@ widget_defaults = dict(
     font="JetBrainsMono Nerd Font Bold",
     fontsize=14,
     padding=3,
+    foreground=colors["fg"],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -233,8 +258,20 @@ widgets = [
     ),
     widget.Spacer(length=4),
     widget.GroupBox(
-        highlight_method="line",
+        margin=6,
+        disable_drag=True,
         visible_groups=["1", "2", "3", "4", "5"],
+        highlight_method="line",
+        # Group label color
+        active=colors["fg"],
+        inactive=colors["8"],
+        block_highlight_text_color=colors["6"],     # Focused group label on all screens
+        # Focused styles
+        highlight_color=colors["8"],                # Focused group bg on focused screen only
+        this_current_screen_border=colors["4"],     # Focused group line on current focused screen
+        this_screen_border=colors["8"],             # Focused group line on current unfocused screen
+        other_current_screen_border=colors["4"],    # Focused group line on other focused screen
+        other_screen_border=colors["8"],            # Focused group line on other unfocused screen
     ),
     widget.Spacer(length=4),
     widget.Prompt(),
@@ -274,6 +311,7 @@ screens = [
         top=bar.Bar(
             widgets=widgets,
             size=36,
+            background=colors["bg"]
         )
     )
 ]
