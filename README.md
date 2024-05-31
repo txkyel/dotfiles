@@ -8,12 +8,31 @@ Includes settings for:
 * Neovim
 * Kmonad
 
-## NOtes
+## Notes
 
 ## TODO
+* Qtile
+  * Add moving window to next/previous window with mod+shift+h/l
 * Add dunst configs
+  * Add styling
+  * Add dracula themeing
+  * Add volume notification
+  * Add calendar on clock click
 * Add rofi configs
-* Add general theming
+  * Add styling
+  * Add dracula themeing
+  * Add wifi menu
+  * Add screenshot menu
+* Add a compositor
+  * Stop/reduce screen tearing
+  * Add rounded corners?
+  * Add transparency?
+* Neovim
+  * Add dracula theme
+* Kmonad
+  * Figure out if there is a QMK one shot key equivalent
+* Autoricing? pywal?
+* Themes other than dracula?
 
 ## How to install/manage dotfiles
 
