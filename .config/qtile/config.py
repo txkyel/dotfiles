@@ -285,7 +285,7 @@ widgets = [
     widget.Spacer(length=10),
     widget.Systray(padding=10),
     widget.Spacer(length=10),
-    widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}"),
+    widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}", threshold=80),
     widget.Spacer(length=10),
     widget.CPU(format="  {load_percent}%"),
     widget.Spacer(length=10),
