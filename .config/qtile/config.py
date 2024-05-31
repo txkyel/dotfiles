@@ -276,7 +276,7 @@ widgets = [
     widget.Spacer(length=4),
     widget.Prompt(),
     widget.Spacer(length=4),
-    widget.WindowName(),
+    widget.WindowName(max_chars=50),
     widget.Spacer(length=10),
     widget.Systray(padding=10),
     widget.Spacer(length=10),
