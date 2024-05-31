@@ -58,6 +58,16 @@ keys = [
     # Fullscreen
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
+    # Screens
+    Key([mod], "comma", lazy.prev_screen(), desc="Move focus to previous screen"),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus to next screen"),
+
+    # Spawn programs
+    # rofi
+    Key([mod], "o", lazy.spawn("rofi -show drun"), desc="Spawn a command using rofi"),
+    Key([mod], "p", lazy.spawn("rofipower"), desc="Shutdown menu"),
+    # terminal
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -69,15 +79,10 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-
-    # rofi
-    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using rofi"),
-    Key([mod], "p", lazy.spawn("rofipower"), desc="Shutdown menu"),
 
     # Keybindings
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 15%-"), desc="Lower Brightness"),
@@ -104,7 +109,7 @@ keys = [
     Key(
         [],
         "Print",
-        lazy.spawn("maim | xclip -selection clipboard -t image/png", shell=True),
+        lazy.spawn("maim -u | xclip -selection clipboard -t image/png", shell=True),
         desc="Screenshot to clipboard"
     ),
 ]
