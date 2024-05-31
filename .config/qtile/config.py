@@ -101,12 +101,17 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Skip to next"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Skip to previous"),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop"), desc="Stop player"),
-    # Screenshot entire desktop to clipboard
     Key(
         [],
         "Print",
         lazy.spawn("maim -u | xclip -selection clipboard -t image/png", shell=True),
-        desc="Screenshot to clipboard"
+        desc="Screenshot desktop to clipboard"
+    ),
+    Key(
+        ["shift"],
+        "Print",
+        lazy.spawn("maim -us | xclip -selection clipboard -t image/png", shell=True),
+        desc="Screenshot selection to clipboard"
     ),
 ]
 
@@ -168,8 +173,8 @@ layout_theme = {
 }
 
 layouts = [
-    layout.Tile(**layout_theme),
     layout.Max(),
+    layout.Tile(**layout_theme),
     # layout.MonadTall(**layout_theme),
     # layout.Columns(**layout_theme, border_focus_stack=["#d75f5f", "#8f3d3d"]),
     # layout.Stack(num_stacks=2),
