@@ -29,6 +29,7 @@ from libqtile.widget.battery import Battery, BatteryState, BatteryStatus
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+import psutil
 
 mod = "mod4"
 terminal = "alacritty"
@@ -257,7 +258,8 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
-def init_widgets():
+def init_widgets(main_screen=False):
+    # Add left hand side widgets
     widgets = [
         widget.Spacer(length=10),
         widget.CurrentLayoutIcon(
@@ -281,8 +283,14 @@ def init_widgets():
         ),
         widget.Spacer(length=10),
         widget.WindowName(max_chars=50),
-        widget.Spacer(length=10),
-        widget.Systray(padding=10),
+    ]
+
+    # Conditionally add systray widget
+    if main_screen:
+        widgets.extend([widget.Spacer(length=10), widget.Systray(padding=10)])
+
+    # Add sensor widget
+    widgets.extend([
         widget.Spacer(length=10),
         widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}", threshold=80),
         widget.Spacer(length=10),
@@ -291,16 +299,15 @@ def init_widgets():
         widget.Memory(format=" {MemUsed: .0f}{mm}"),
         # widget.Spacer(length=10),
         # widget.Bluetooth(),
-        # Excluded if using wired connection
-        # widget.Spacer(length=10),
-        # widget.Wlan(interface="wlp3s0"),
+    ])
+
+    # Conditionally add battery widget
+    if psutil.sensors_battery() is not None:
+        widgets.extend([widget.Spacer(length=10), MyBattery(low_percentage=0.1, notify_below=0.1)])
+
+    # Add fixed right hand side widgets
+    widgets.extend([
         widget.Spacer(length=10),
-        MyBattery(
-            low_percentage=0.1,
-            notify_below=0.1,
-        ),
-        widget.Spacer(length=10),
-        # Space added to allow space for non monospace emojis
         VolumeIcon(),
         widget.Volume(),
         widget.Spacer(length=10),
@@ -308,25 +315,20 @@ def init_widgets():
         widget.Spacer(length=10),
         widget.Clock(format="󰥔 %H:%M"),
         widget.Spacer(length=10),
-    ]
-    return widgets
-
-def init_subscreen_widgets():
-    widgets = init_widgets()
-    del widgets[7:9]
+    ])
     return widgets
 
 screens = [
     Screen(
         top=bar.Bar(
-            widgets=init_widgets(),
+            widgets=init_widgets(main_screen=True),
             size=36,
             background=colors["bg"]
         ),
     ),
     Screen(
         top=bar.Bar(
-            widgets=init_subscreen_widgets(),
+            widgets=init_widgets(),
             size=36,
             background=colors["bg"]
         ),
