@@ -109,8 +109,8 @@ keys = [
         desc="Screenshot desktop to clipboard"
     ),
     Key(
-        ["shift"],
-        "Print",
+        [mod, "shift"],
+        "s",
         lazy.spawn("maim -us | xclip -selection clipboard -t image/png", shell=True),
         desc="Screenshot selection to clipboard"
     ),
