@@ -257,68 +257,79 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
-widgets = [
-    widget.Spacer(length=10),
-    widget.CurrentLayoutIcon(
-        scale=0.45,
-    ),
-    widget.Spacer(length=4),
-    widget.GroupBox(
-        margin=6,
-        disable_drag=True,
-        highlight_method="line",
-        # Group label color
-        active=colors["fg"],
-        inactive=colors["8"],
-        block_highlight_text_color=colors["6"],     # Focused group label on all screens
-        # Focused styles
-        highlight_color=colors["8"],                # Focused group bg on focused screen only
-        this_current_screen_border=colors["4"],     # Focused group line on current focused screen
-        this_screen_border=colors["8"],             # Focused group line on current unfocused screen
-        other_current_screen_border=colors["4"],    # Focused group line on other focused screen
-        other_screen_border=colors["8"],            # Focused group line on other unfocused screen
-    ),
-    widget.Spacer(length=4),
-    widget.Prompt(),
-    widget.Spacer(length=4),
-    widget.WindowName(max_chars=50),
-    widget.Spacer(length=10),
-    widget.Systray(padding=10),
-    widget.Spacer(length=10),
-    widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}", threshold=80),
-    widget.Spacer(length=10),
-    widget.CPU(format="  {load_percent}%"),
-    widget.Spacer(length=10),
-    widget.Memory(format=" {MemUsed: .0f}{mm}"),
-    # widget.Spacer(length=10),
-    # widget.Bluetooth(),
-    # Excluded if using wired connection
-    # widget.Spacer(length=10),
-    # widget.Wlan(interface="wlp3s0"),
-    widget.Spacer(length=10),
-    MyBattery(
-        low_percentage=0.1,
-        notify_below=0.1,
-    ),
-    widget.Spacer(length=10),
-    # Space added to allow space for non monospace emojis
-    VolumeIcon(),
-    widget.Volume(),
-    widget.Spacer(length=10),
-    widget.Clock(format="󰃭 %a, %b %d"),
-    widget.Spacer(length=10),
-    widget.Clock(format="󰥔 %H:%M"),
-    widget.Spacer(length=10),
-]
+def init_widgets():
+    widgets = [
+        widget.Spacer(length=10),
+        widget.CurrentLayoutIcon(
+            scale=0.45,
+        ),
+        widget.Spacer(length=10),
+        widget.GroupBox(
+            margin=6,
+            disable_drag=True,
+            highlight_method="line",
+            # Group label color
+            active=colors["fg"],
+            inactive=colors["8"],
+            block_highlight_text_color=colors["6"],     # Focused group label on all screens
+            # Focused styles
+            highlight_color=colors["8"],                # Focused group bg on focused screen only
+            this_current_screen_border=colors["4"],     # Focused group line on current focused screen
+            this_screen_border=colors["8"],             # Focused group line on current unfocused screen
+            other_current_screen_border=colors["4"],    # Focused group line on other focused screen
+            other_screen_border=colors["8"],            # Focused group line on other unfocused screen
+        ),
+        widget.WindowName(max_chars=50),
+        widget.Spacer(length=10),
+        widget.Systray(padding=10),
+        widget.Spacer(length=10),
+        widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}", threshold=80),
+        widget.Spacer(length=10),
+        widget.CPU(format="  {load_percent}%"),
+        widget.Spacer(length=10),
+        widget.Memory(format=" {MemUsed: .0f}{mm}"),
+        # widget.Spacer(length=10),
+        # widget.Bluetooth(),
+        # Excluded if using wired connection
+        # widget.Spacer(length=10),
+        # widget.Wlan(interface="wlp3s0"),
+        widget.Spacer(length=10),
+        MyBattery(
+            low_percentage=0.1,
+            notify_below=0.1,
+        ),
+        widget.Spacer(length=10),
+        # Space added to allow space for non monospace emojis
+        VolumeIcon(),
+        widget.Volume(),
+        widget.Spacer(length=10),
+        widget.Clock(format="󰃭 %a, %b %d"),
+        widget.Spacer(length=10),
+        widget.Clock(format="󰥔 %H:%M"),
+        widget.Spacer(length=10),
+    ]
+    return widgets
+
+def init_subscreen_widgets():
+    widgets = init_widgets()
+    del widgets[6:8]
+    return widgets
 
 screens = [
     Screen(
         top=bar.Bar(
-            widgets=widgets,
+            widgets=init_widgets(),
             size=36,
             background=colors["bg"]
-        )
-    )
+        ),
+    ),
+    Screen(
+        top=bar.Bar(
+            widgets=init_subscreen_widgets(),
+            size=36,
+            background=colors["bg"]
+        ),
+    ),
 ]
 
 # Drag floating layouts.
