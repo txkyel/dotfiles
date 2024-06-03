@@ -279,6 +279,7 @@ def init_widgets():
             other_current_screen_border=colors["4"],    # Focused group line on other focused screen
             other_screen_border=colors["8"],            # Focused group line on other unfocused screen
         ),
+        widget.Spacer(length=10),
         widget.WindowName(max_chars=50),
         widget.Spacer(length=10),
         widget.Systray(padding=10),
@@ -312,7 +313,7 @@ def init_widgets():
 
 def init_subscreen_widgets():
     widgets = init_widgets()
-    del widgets[6:8]
+    del widgets[7:9]
     return widgets
 
 screens = [
