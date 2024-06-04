@@ -130,19 +130,19 @@ for i in groups:
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # mod1 + control + group number = move focused window to group
+            # mod1 + control + group number = switch to & move focused window to group
             Key(
                 [mod, "control"],
                 i.name,
-                lazy.window.togroup(i.name),
-                desc="move focused window to group {}".format(i.name)
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
             ),
-            # # mod1 + control + group number = switch to & move focused window to group
+            # # mod1 + control + group number = move focused window to group
             # Key(
             #     [mod, "control"],
             #     i.name,
-            #     lazy.window.togroup(i.name, switch_group=True),
-            #     desc="Switch to & move focused window to group {}".format(i.name),
+            #     lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)
             # ),
         ]
     )
@@ -264,7 +264,7 @@ extension_defaults = widget_defaults.copy()
 def init_widgets(main_screen=False):
     # Add left hand side widgets
     widgets = [
-        widget.Spacer(length=10),
+        widget.Spacer(length=16),
         widget.CurrentLayoutIcon(
             scale=0.45,
         ),
@@ -295,11 +295,17 @@ def init_widgets(main_screen=False):
     # Add sensor widget
     widgets.extend([
         widget.Spacer(length=10),
-        widget.ThermalSensor(tag_sensor="CPU", format=" {temp:.0f}{unit}", threshold=80),
+        widget.ThermalSensor(
+            tag_sensor="CPU",
+            format=" {temp:.0f}{unit}",
+            threshold=80,
+            foreground=colors["3"],
+            foreground_alert=colors["1"],
+        ),
         widget.Spacer(length=10),
-        widget.CPU(format="  {load_percent}%"),
+        widget.CPU(format="  {load_percent}%", foreground=colors["2"]),
         widget.Spacer(length=10),
-        widget.Memory(format=" {MemUsed: .0f}{mm}"),
+        widget.Memory(format=" {MemUsed: .0f}{mm}", foreground=colors["4"]),
         # widget.Spacer(length=10),
         # widget.Bluetooth(),
     ])
@@ -311,13 +317,13 @@ def init_widgets(main_screen=False):
     # Add fixed right hand side widgets
     widgets.extend([
         widget.Spacer(length=10),
-        VolumeIcon(),
-        widget.Volume(),
+        VolumeIcon(foreground=colors["6"]),
+        widget.Volume(foreground=colors["6"]),
         widget.Spacer(length=10),
         widget.Clock(format="󰃭 %a, %b %d"),
         widget.Spacer(length=10),
         widget.Clock(format="󰥔 %H:%M"),
-        widget.Spacer(length=10),
+        widget.Spacer(length=16),
     ])
     return widgets
 
