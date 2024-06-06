@@ -1,7 +1,11 @@
 #!/bin/sh
 
+xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!
 # Temp at home set up, use external monitor only cause x230 TN panel is straining my eyes
 xrandr | grep "DP1 disconnected" \
     || xrandr --output DP1 --primary --mode 2560x1440 --output LVDS1 --off
 dunst &
 picom &
+
+# Wait for xrdb to finish before running WM
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
